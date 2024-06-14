@@ -1,6 +1,6 @@
-const mongoose=require('mongoose');
+import mongoose from "mongoose";
 
-const UserSchema=new mongoose.Schema({
+const userSchema=new mongoose.Schema({
     username:{
         type:String,
         required: true,
@@ -11,14 +11,12 @@ const UserSchema=new mongoose.Schema({
         required: true,
         unique: true
     },
-    password_hash:{
+    password:{
         type: String,
         required: true,
     },
-    created_at:{
-        type: Date,
-        default: Date.now
-    }
-});
+   
+    
+},{timestamps: true});
 
-module.exports=mongoose.model('User',UserSchema);
+export const User=mongoose.model('User',userSchema)

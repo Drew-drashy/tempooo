@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const BudgetSchema = new mongoose.Schema({
+const budgetSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -22,6 +22,6 @@ const BudgetSchema = new mongoose.Schema({
     type: Date,
     required: true
   }
-});
+},{timestamps:true});
 
-module.exports = mongoose.model('Budget', BudgetSchema);
+export const Budget = mongoose.model('Budget', budgetSchema);

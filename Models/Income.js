@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+import { Schema } from "mongoose";
 
-const IncomeSchema = new mongoose.Schema({
+const incomeSchema = new mongoose.Schema({
   user_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
@@ -18,6 +19,6 @@ const IncomeSchema = new mongoose.Schema({
     type: Date,
     required: true
   }
-});
+},{timestamps:true});
+export const Income=mongoose.model('Income',incomeSchema)
 
-module.exports = mongoose.model('Income', IncomeSchema);

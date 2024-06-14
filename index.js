@@ -1,37 +1,14 @@
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const connectDB = require('./config/db');
-// const userRoutes = require('./routes/userRoutes');
+import dotenv from 'dotenv'
+import connectToDB from './db/dbConnect.js'
+import app from './app.js'
 
-// const app = express();
-
-// // Connect Database
-// connectDB();
-
-// // Middleware
-// app.use(bodyParser.json());
-
-// // Routes
-// app.use('/api/users', userRoutes);
-
-// const PORT = process.env.PORT || 5000;
-
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-const express= require('express');
-const mongoose =require('mongoose');
-const cors=require('cors');
-const { rawListeners } = require('./Models/User');
-const app=express();
-const UserModel=require('./Models/User');
-app.use(cors())
-app.use(express.json())
-
-mongoose.connect("mongodb://localhost:127.0.0.1:27017/personal_finance")
-
-
-app.get('/getuser')
-app.listen(3031,()=>{
-    console.log('server is runnning');
+dotenv.config({
+    path: '/env'
+})
+connectToDB().then(()=>{
+    app.listen(process.env.PORT|| 8000,()=>{
+        console.log(`server is running on port ${process.env.PORT}`)
+})
+}).catch((err)=>{
+    console.log('mongodb connection is lost',err)
 })
